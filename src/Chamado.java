@@ -47,4 +47,8 @@ public class Chamado {
                 "\nStatus: " + status +
                 "\n----------------------";
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
