@@ -1,12 +1,24 @@
 import java.util.ArrayList;
 
 public class ChamadoService {
-    private ArrayList<Chamado> listaChamado = new ArrayList<>();
+    final ArrayList<Chamado> listaChamado = new ArrayList<>();
     private int contadorId = 1;
 
     public void cadastroChamado(String titulo, String descricao, String solicitante) {
-        Chamado novo = new Chamado(contadorId, titulo, descricao, solicitante, "ABERTO");
 
+        if (titulo.isBlank()) {
+            System.out.println("Título não pode estar vazio");
+            return;
+        }
+        if (descricao.isBlank()) {
+            System.out.println("descrição não pode estar vazio");
+            return;
+        }
+        if (solicitante.isBlank()) {
+            System.out.println("solicitante não pode estar vazio");
+            return;
+        }
+        Chamado novo = new Chamado(contadorId, titulo, descricao, solicitante, "ABERTO");
         listaChamado.add(novo);
         contadorId++;
 
@@ -14,6 +26,7 @@ public class ChamadoService {
     }
 
     public void listarChamado() {
+
         if (listaChamado.isEmpty()) {
             System.out.println("Nenhum chamado cadastrado.");
         } else {
@@ -40,17 +53,24 @@ public class ChamadoService {
         }
     }
 
-    public void atualizarStatus(int idBuscar, String novoStatus) {
+    public void atualizarStatus(int idBuscar, String novoStatus){
        boolean encontrado = false;
 
-        for (Chamado chamado : listaChamado) {
+       if (!novoStatus.equalsIgnoreCase("ABERTO")
+               && !novoStatus.equalsIgnoreCase("EM ANDAMENTO")
+               && !novoStatus.equalsIgnoreCase("FINALIZADO")) {
+           System.out.println("Status inválido");
+           return;
+       }
 
+        for (Chamado chamado : listaChamado) {
             if (chamado.getID() == idBuscar){
                 chamado.setStatus(novoStatus);
                 System.out.println("Status atualizado com sucesso");
                 encontrado = true;
                 break;
             }
+
         }
         if (!encontrado) {
             System.out.println("Chamado não encontrado");

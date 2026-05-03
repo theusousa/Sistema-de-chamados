@@ -43,13 +43,35 @@ public class Main {
 
 
             } else if (opcao == 4) {
+                
                 System.out.println("Digite o ID do chamado que deseja atualizar:");
                 int idBuscar = sc.nextInt();
                 sc.nextLine();
 
-                System.out.println("Digite o novo status:");
-                String novoStatus = sc.nextLine();
-                chamadoService.atualizarStatus(idBuscar, novoStatus);
+                System.out.println("1 - ABERTO");
+                System.out.println("2 - EM ANDAMENTO");
+                System.out.println("3 - FINALIZADO");
+
+                System.out.println("Selecione o novo status: ");
+                int statusOpcao = sc.nextInt();
+                sc.nextLine();
+
+                String novoStatus = "";
+
+                if (statusOpcao == 1) {
+                    novoStatus = "ABERTO";
+                } else if (statusOpcao == 2) {
+                    novoStatus = "EM ANDAMENTO";
+                } else if (statusOpcao == 3) {
+                    novoStatus = "FINALIZADO";
+                } else {
+                    System.out.println("Opção inválida");
+                }
+
+                if (!novoStatus.isBlank()) {
+                    chamadoService.atualizarStatus(idBuscar, novoStatus);
+                }
+
 
             } else if (opcao == 5) {
                 System.out.println("Digite o ID do chamado que deseja excluir:");
