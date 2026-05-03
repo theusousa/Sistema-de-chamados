@@ -1,13 +1,11 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Chamado> listaChamado = new ArrayList<>();
+        ChamadoService chamadoService = new ChamadoService();
 
         int opcao;
-        int contadorId = 1;
 
         do {
             System.out.println("1 - Abrir chamado");
@@ -30,21 +28,10 @@ public class Main {
                 System.out.println("Digite o solicitante:");
                 String solicitante = sc.nextLine();
 
-                Chamado novo = new Chamado(contadorId, titulo, descricao, solicitante, "ABERTO");
-
-                listaChamado.add(novo);
-                contadorId++;
-
-                System.out.println("Chamado criado com sucesso!");
+                chamadoService.cadastroChamado(titulo, descricao, solicitante);
 
             } else if (opcao == 2) {
-                if (listaChamado.isEmpty()) {
-                    System.out.println("Nenhum Chamado cadastrado.");
-                } else {
-                    for (Chamado chamado : listaChamado) {
-                        System.out.println(chamado);
-                    }
-                }
+                chamadoService.listarChamado();
 
 
             } else if (opcao == 3) {
@@ -52,19 +39,7 @@ public class Main {
                 int idBusca = sc.nextInt();
                 sc.nextLine();
 
-                boolean encontrado = false;
-
-                for (Chamado chamado : listaChamado) {
-                    if (chamado.getID() == idBusca) {
-                        System.out.println(chamado);
-                        encontrado = true;
-                        break;
-                    }
-                }
-
-                if (!encontrado) {
-                    System.out.println("Chamado não encontrado");
-                }
+                chamadoService.buscarId(idBusca);
 
 
             } else if (opcao == 4) {
@@ -72,43 +47,16 @@ public class Main {
                 int idBuscar = sc.nextInt();
                 sc.nextLine();
 
-                boolean encontrado = false;
-
-                for (Chamado chamado : listaChamado) {
-                    if (chamado.getID() == idBuscar) {
-                        System.out.println("Chamado encontrado");
-                        System.out.println(chamado);
-
-                        System.out.println("Digite o novo status: ");
-                        String novoStatus = sc.nextLine();
-
-                        chamado.setStatus(novoStatus);
-
-                        System.out.println("Status atualizado com sucesso");
-                        encontrado = true;
-                        break;
-                    }
-                }
+                System.out.println("Digite o novo status:");
+                String novoStatus = sc.nextLine();
+                chamadoService.atualizarStatus(idBuscar, novoStatus);
 
             } else if (opcao == 5) {
                 System.out.println("Digite o ID do chamado que deseja excluir:");
                 int idBusca = sc.nextInt();
                 sc.nextLine();
 
-                boolean removido = false;
-
-                for (Chamado chamado : listaChamado) {
-                    if (chamado.getID() == idBusca) {
-                        listaChamado.remove(chamado);
-                        System.out.println("Chamado excluido com sucesso");
-                        removido = true;
-                        break;
-                    }
-                }
-
-                if (!removido) {
-                    System.out.println("Chamado não encontrado.");
-                }
+                chamadoService.excluirChamado(idBusca);
 
             } else if (opcao == 6) {
                 System.out.println("Saindo do sistema...");
@@ -117,7 +65,7 @@ public class Main {
                 System.out.println("Opção inválida!");
             }
 
-        } while (opcao != 4);
+        } while (opcao != 6);
 
         sc.close();
     }
