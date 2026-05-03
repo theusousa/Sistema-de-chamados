@@ -1,7 +1,9 @@
+package service;
+import model.Chamado;
 import java.util.ArrayList;
 
 public class ChamadoService {
-    final ArrayList<Chamado> listaChamado = new ArrayList<>();
+    private ArrayList<Chamado> listaChamado = new ArrayList<>();
     private int contadorId = 1;
 
     public void cadastroChamado(String titulo, String descricao, String solicitante) {
@@ -22,7 +24,7 @@ public class ChamadoService {
         listaChamado.add(novo);
         contadorId++;
 
-        System.out.println("Chamado criado com sucesso!");
+        System.out.println("model.Chamado criado com sucesso!");
     }
 
     public void listarChamado() {
@@ -49,7 +51,7 @@ public class ChamadoService {
         }
 
         if (!encontrado) {
-            System.out.println("Chamado não encontrado");
+            System.out.println("model.Chamado não encontrado");
         }
     }
 
@@ -73,7 +75,7 @@ public class ChamadoService {
 
         }
         if (!encontrado) {
-            System.out.println("Chamado não encontrado");
+            System.out.println("model.Chamado não encontrado");
         }
     }
 
@@ -82,13 +84,13 @@ public class ChamadoService {
         for (Chamado chamado : listaChamado) {
             if (chamado.getID() == idBusca) {
                 listaChamado.remove(chamado);
-                System.out.println("Chamado excluido com sucesso");
+                System.out.println("model.Chamado excluido com sucesso");
                 removido = true;
                 break;
             }
         }
         if (!removido) {
-            System.out.println("Chamado não encontrado");
+            System.out.println("model.Chamado não encontrado");
         }
     }
 }

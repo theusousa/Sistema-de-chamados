@@ -1,3 +1,5 @@
+package model;
+
 public class Chamado {
     private int id;
     private String titulo;

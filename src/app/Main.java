@@ -1,3 +1,5 @@
+package app;
+import service.ChamadoService;
 import java.util.Scanner;
 
 public class Main {
